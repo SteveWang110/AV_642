@@ -1175,7 +1175,7 @@ class Environment:
         distance_from_center = vehicle_location.distance(center_of_lane)
 
         # Check if vehicle is far from center or colliding
-        not_near_center = distance_from_center > road_half_width / 0.9
+        not_near_center = distance_from_center > road_half_width / 1.1
         collision = self.collision_detected
        # print("Attempting to detect unsafe lane change")
         unsafe_lane_change = self.detect_unsafe_lane_change()  # Custom attribute to track unsafe lane changesn #error here

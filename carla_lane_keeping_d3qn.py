@@ -14,6 +14,7 @@ import cv2
 import sys
 from PIL import Image
 import csv
+import os
 
 
 """
@@ -1642,6 +1643,11 @@ if __name__ == "__main__":
 
     # initialize HUD
     hud = HUD(sensor_config["image_size_x"], sensor_config["image_size_y"])
+
+    root_directory = os.path.abspath(os.path.dirname(__file__))
+    save_path = os.path.join(root_directory, 'saves')
+    print(save_path)
+
     if args.operation[0].lower() == "new" or args.operation[0].lower() == "tune":
         """
         Initializing hyper-parameters and beginning the training loop
@@ -1650,7 +1656,7 @@ if __name__ == "__main__":
         """
 
         if args.operation[0].lower() == "tune":
-            network.load_state_dict(torch.load(args.save_path[0]))
+            network.load_state_dict(torch.load(os.path.join(save_path, "v" + args.save_path[0])))
             target_network = deepcopy(network)
 
         replay_buffer = ReplayBuffer(10000)
@@ -1690,6 +1696,10 @@ if __name__ == "__main__":
         lane_deviations = []
         speeds = []
         angles = []
+
+
+
+
         for episode in range(num_episodes):
             torch.cuda.empty_cache()    #CHANGED
             ep_deviation = []
@@ -1783,7 +1793,7 @@ if __name__ == "__main__":
                 print("Saving new best")
                 torch.save(
                     target_network.state_dict(),
-                    "saves/v" + args.version[0] + "_best_dqn_network_nn_model.pth",
+                    os.path.join(save_path, "v" + args.version[0] + "_best_dqn_network_nn_model.pth") #CHANGED HERE
                 )
                 best_dict_reward = total_reward
 
@@ -1798,8 +1808,8 @@ if __name__ == "__main__":
         # Save the model's state dictionary
         torch.save(
             target_network.state_dict(),
-            "saves/v" + args.version[0] + "_final_dqn_network_nn_model.pth",
-        )
+            os.path.join(save_path, "v" + args.version[0] + "_final_dqn_network_nn_model.pth"
+                         ))
         file.close()
         file2.close()
 
@@ -1833,7 +1843,7 @@ if __name__ == "__main__":
     elif args.operation[0].lower() == "load":
         print(f"Loading model from {args.save_path[0]}")
         network = DuelingDDQN(NUM_ACTIONS).to(device)
-        network.load_state_dict(torch.load(args.save_path[0]))
+        network.load_state_dict(torch.load(os.path.join(save_path, "v" + args.save_path[0])))
         network.eval()
         num_episodes = int(args.num_episodes[0])
         total_rewards = []

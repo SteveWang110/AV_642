@@ -68,6 +68,6 @@ Once the models finish training, figures will be displayed that can help judge t
 
 **Video Demonstration**
 
-A 5-minute project summary video is available [here](https://chatgpt.com/c/674a6ad3-e04c-800a-8aa9-30038574be8a#).
+A 5-minute project summary video is available [here](https://www.youtube.com/watch?v=o6uuwdrDYR0).
 
 ##

@@ -42,7 +42,7 @@ def translate_labels(root, dest_language):
 available_ops = ["New", "Load", "Tune"]
 
 # reward functions
-available_rewards = ["1", "2", "3", "4"]
+available_rewards = ["1", "2", "3", "4", "5"]
 
 # available maps
 available_maps = ["Town01", "Town02", "Town03", "Town04", "Town05"]
@@ -195,7 +195,7 @@ entry8.grid(row=7, column=1, padx=5, pady=5)
 label9 = tk.Label(root, text="Random Vehicle Spawn Location?")
 label9.grid(row=8, column=0, padx=5, pady=5)
 entry9 = ttk.Combobox(root, values=true_false)
-entry9.insert(0, "True")
+entry9.insert(0, "False")
 entry9.grid(row=8, column=1, padx=5, pady=5)
 
 

@@ -625,9 +625,9 @@ class Environment:
             if actor_to_delete is not None:
                 # If the actor exists, delete it
                 actor_to_delete.destroy()
-                print(
-                    "Deleted:", actor_to_delete.type_id, "with ID:", actor_to_delete.id
-                )
+           #     print(
+           #         "Deleted:", actor_to_delete.type_id, "with ID:", actor_to_delete.id
+            #    )
             else:
                 # If the actor doesn't exist, print a message (optional)
                 print("Actor with ID", actor_id, "not found.")
@@ -651,7 +651,7 @@ class Environment:
         # adding additional traffic for overtaking simulation
         # list of ideal spawn indexes for overtaking
         ideal_spawns = [37, 39, 40, 366, 367, 365, 263, 33, 35, 36, 312, 313, 314, 315, 49, 50, 51, 52, 45, 46, 47, 48, 41, 42, 43, 44, 278, 279, 280, 281 ]
-        for i in range(0):
+        for i in range(20):
             transform = (spawn_points[random.choice(ideal_spawns)]) # choose random ideal spawns for some variety between episodes
             blueprint = random.choice(self.vehicle_bps)
             autovehicle = self.world.try_spawn_actor(blueprint, transform)
@@ -1176,7 +1176,7 @@ class Environment:
         distance_from_center = vehicle_location.distance(center_of_lane)
 
         # Check if vehicle is far from center or colliding
-        not_near_center = distance_from_center > road_half_width / 1.1
+        not_near_center = distance_from_center > road_half_width / 1.4
         collision = self.collision_detected
        # print("Attempting to detect unsafe lane change")
         unsafe_lane_change = self.detect_unsafe_lane_change()  # Custom attribute to track unsafe lane changesn #error here
